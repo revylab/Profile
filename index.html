@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevNets - Muhammad Revi Ramadhan's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* CSS styles */
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #64ffda;
+            --accent-color: #ff6b6b;
+            --text-color: #e6f1ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero section styles */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.7s;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        /* Skills section styles */
+        .skills {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .skills h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-item i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        /* Projects section styles */
+        .projects {
+            padding: 100px 0;
+        }
+
+        .projects h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* quotess section styles */
+        .quotess {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .quotess h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+
+        .quotes-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .quotes-slide {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .quotes-item {
+            flex: 0 0 100%;
+            padding: 0 20px;
+        }
+
+        .quotes-content {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quotes-author {
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .skills-grid,
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .popup-buttons {
+            margin-top: 20px;
+        }
+
+        .popup-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-buttons button:first-child {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .popup-buttons button:last-child {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+        }
+
+        .popup-buttons button:hover {
+            opacity: 0.8;
+        }
+        .typewrite {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .wrap {
+            border-right: 0.08em solid var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">RevNets</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#quotess">quotess</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Muhammad Revi Ramadhan</h1>
+                <p><a href="" class="typewrite" data-period="2000" data-type='[ " Hi, Im Si.", "I am Creative.", "I Love Design.", "I Love to Develop." ]'>
+    <span class="wrap"></span>
+  </a></p>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2>Programming Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fab fa-html5"></i>
+                        <h3>HTML5</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <h3>CSS3</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-react"></i>
+                        <h3>React</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <h3>Node.js</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <h3>Python</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/200" alt="Project 1" class="project-image">
+                        <div class="project-info">
+                            <h3>Project 1</h3>
+                            <p>A brief description of Project 1 goes here.</p>
+                            <a href="#" class="project-link" data-url="https://project1.com">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/200" alt="Project 2" class="project-image">
+                        <div class="project-info">
+                            <h3>Project 2</h3>
+                            <p>A brief description of Project 2 goes here.</p>
+                            <a href="#" class="project-link" data-url="https://project2.com">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="/api/placeholder/400/200" alt="Project 3" class="project-image">
+                        <div class="project-info">
+                            <h3>Project 3</h3>
+                            <p>A brief description of Project 3 goes here.</p>
+                            <a href="#" class="project-link" data-url="https://project3.com">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="quotess" class="quotess">
+    <div class="container">
+        <h2>quotess</h2>
+        <div class="quotes-slider">
+            <div class="quotes-slide">
+                <!-- Slide 1 -->
+                <div class="quotes-item">
+                    <div class="quotes-content">
+                        <p id="quote-text-1">"Initial quote will appear here."</p>
+                    </div>
+                    <p id="quote-author-1" class="quotes-author">- Initial Author</p>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="quotes-item">
+                    <div class="quotes-content">
+                        <p id="quote-text-2">"Next quote will appear here."</p>
+                    </div>
+                    <p id="quote-author-2" class="quotes-author">- Next Author</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    </main>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p>Do you want to proceed to this link?</p>
+            <div class="popup-buttons">
+                <button id="popup-proceed">Proceed</button>
+                <button id="popup-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // JavaScript code
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // JavaScript code
+        document.addEventListener('DOMContentLoaded', () => {
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+
+            // Sticky header
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.style.backgroundColor = 'rgba(10, 25, 47, 0.95)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.backgroundColor = 'rgba(10, 25, 47, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Skills section animation
+            const skillItems = document.querySelectorAll('.skill-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            skillItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+
+            // Project cards tilt effect
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mousemove', handleTilt);
+                card.addEventListener('mouseleave', resetTilt);
+            });
+
+            function handleTilt(e) {
+                const card = this;
+                const cardRect = card.getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const cardCenterY = cardRect.top + cardRect.height / 2;
+                const angleX = (e.clientY - cardCenterY) / 10;
+                const angleY = (cardCenterX - e.clientX) / 10;
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05)`;
+            }
+
+            function resetTilt() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            }
+
+          // quotes slider
+          const quotesSlide = document.querySelector('.quotes-slide');
+            const quotesItems = document.querySelectorAll('.quotes-item');
+            let currentquotes = 0;
+
+            function showNextquotes() {
+                currentquotes = (currentquotes + 1) % quotesItems.length;
+                quotesSlide.style.transform = `translateX(-${currentquotes * 100}%)`;
+            }
+
+            setInterval(showNextquotes, 5000);
+
+            // Popup for external links
+            const popup = document.getElementById('popup');
+            const popupProceed = document.getElementById('popup-proceed');
+            const popupCancel = document.getElementById('popup-cancel');
+            let currentUrl = '';
+
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentUrl = link.getAttribute('data-url');
+                    popup.style.display = 'flex';
+                });
+            });
+
+            popupProceed.addEventListener('click', () => {
+                window.open(currentUrl, '_blank');
+                popup.style.display = 'none';
+            });
+
+            popupCancel.addEventListener('click', () => {
+                popup.style.display = 'none';
+            });
+
+            // Parallax effect for hero background
+            const heroSection = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+                heroContent.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            });
+
+            // Reveal animations for sections
+            const revealSections = document.querySelectorAll('.skills, .projects, .quotess');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealSections.forEach(section => {
+                revealObserver.observe(section);
+            });
+                    // Typewriter effect code
+                    var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+        });
+    </script>
+</body>
+</html>
